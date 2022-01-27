@@ -15,4 +15,5 @@ def process():
 
 @app.route('/result')
 def result():
-    return render_template("result.html")
+    Dojos.get_just_submited_survey()
+    return render_template("result.html", dojo = Dojos.get_just_submited_survey() )

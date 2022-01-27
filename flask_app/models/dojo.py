@@ -15,7 +15,12 @@ class Dojos():
     def save(cls, data):
         query= "INSERT INTO dojos (name, location, language, comment, created_at, updated_at) VALUES (%(name)s, %(location)s, %(language)s, %(comment)s, Now(), Now());"
         return MySQLConnection("dojo_survey").query_db(query,data)
-    
+    @classmethod
+    def get_just_submited_survey(cls):
+        query= "SELECT * FROM dojos ORDER BY id DESC LIMIT 1"
+        result = MySQLConnection("dojo_survey").query_db(query)
+        return cls(result[0])
+
     @staticmethod
     def validate_dojo(dojo):
         is_valid = True
